@@ -1,0 +1,22 @@
+.timePicker > div > input {
+    padding: 6.5px;
+}
+.timePicker > div,
+.timePicker {
+    border-radius: 8px;
+    border: 0;
+}
+.timePicker {
+    display: flex;
+    max-height: 50px;
+    background-color: #f2f3f5;
+}
+.timePickerBlock {
+    display: flex;
+    gap: 0.66em;
+    align-items: center;
+    max-width: 300px;
+}
+.timePickerFormItem {
+    margin-left: 2.5em;
+}
