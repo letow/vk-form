@@ -1,22 +1,43 @@
-.timePicker > div > input {
-    padding: 6.5px;
+.group {
+    margin: 0 auto;
 }
+
+.timePicker > div > input {
+    padding: 6.5px 12px;
+}
+
 .timePicker > div,
 .timePicker {
     border-radius: 8px;
-    border: 0;
 }
+
 .timePicker {
-    display: flex;
-    max-height: 50px;
     background-color: #f2f3f5;
 }
-.timePickerBlock {
+
+.timePickerBlock,
+.datePickerBlock {
     display: flex;
     gap: 0.66em;
     align-items: center;
-    max-width: 300px;
+    max-width: 500px;
 }
+
 .timePickerFormItem {
     margin-left: 2.5em;
+}
+
+@media (max-width: 768px) {
+    .timePickerFormItem {
+        margin-left: 0;
+    }
+
+    .datePickerBlock {
+        display: inline;
+    }
+
+    .datePickerBlock,
+    .timePickerBlock {
+        max-width: fit-content;
+    }
 }
