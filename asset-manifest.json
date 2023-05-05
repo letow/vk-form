@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/vk-form/static/css/main.c82eeceb.css",
+    "main.js": "/vk-form/static/js/main.0ae80462.js",
+    "index.html": "/vk-form/index.html",
+    "main.c82eeceb.css.map": "/vk-form/static/css/main.c82eeceb.css.map",
+    "main.0ae80462.js.map": "/vk-form/static/js/main.0ae80462.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c82eeceb.css",
+    "static/js/main.0ae80462.js"
+  ]
+}
