@@ -13,7 +13,7 @@ import {
 } from "@vkontakte/vkui";
 import "./Form.css";
 import dayjs from "dayjs";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker/TimePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -53,7 +53,7 @@ export const Form = () => {
     const [room, setRoom] = useState<string>("");
     const [date, setDate] = useState<Date | undefined>(() => new Date());
     const [text, setText] = useState<string>("");
-    const [isError, setIsError] = useState<boolean>(true);
+    const [isFormFilled, setIsFormFilled] = useState<boolean>(false);
 
     // assume that conference rooms available from 9 to 21 (while VK office is open)
     const minTime = dayjs().set("hour", 9).startOf("hour");
@@ -90,20 +90,23 @@ export const Form = () => {
         setText(e.target.value);
     };
 
-    useEffect(() => {
-        if (!startTime || !endTime) return; // if times are empty
+    const isAllFieldsFilled = useCallback((): boolean => {
+        if (!startTime || !endTime) return false; // if any of timepickers is empty
 
         // check if all fields are not empty
-        // else enable the send button
-        startTime.isAfter(endTime, "minutes") ||
-        startTime.isSame(endTime, "minutes") ||
-        !tower ||
-        !floor ||
-        !room ||
-        !date
-            ? setIsError(true)
-            : setIsError(false);
-    }, [startTime, endTime, tower, floor, room, date]);
+        return Boolean(
+            !startTime.isAfter(endTime, "minutes") &&
+                !startTime.isSame(endTime, "minutes") &&
+                tower &&
+                floor &&
+                room &&
+                date
+        );
+    }, [tower, floor, room, date, startTime, endTime]);
+
+    useEffect(() => {
+        setIsFormFilled(isAllFieldsFilled());
+    }, [isAllFieldsFilled]);
 
     return (
         <Panel id="new-book">
@@ -210,7 +213,7 @@ export const Form = () => {
                         <Button
                             size="l"
                             stretched
-                            disabled={isError}
+                            disabled={!isFormFilled}
                             onClick={sendInfo}
                         >
                             Отправить
